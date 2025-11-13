@@ -1,15 +1,26 @@
-version: '3.8'
+# Borramos la línea 'version: 3.8', ya no es necesaria y genera un warning.
 
 services:
   # --- Servicio de Base de Datos PostgreSQL ---
   db_apuestas:
     image: postgres:15-alpine
     container_name: casigano-db-postgres
-    # ... (el resto de tu configuración de db_apuestas)
+    restart: always
+    
+    # --- BLOQUE AÑADIDO (¡Este faltaba!) ---
+    # Estas son las instrucciones para crear la BD
+    environment:
+      POSTGRES_USER: casigano_user
+      POSTGRES_PASSWORD: casigano_pass
+      POSTGRES_DB: casigano_apuestas_db
+      
+    ports:
+      - "5432:5432" # Expone el puerto de la BD a tu máquina
     volumes:
       - postgres-data:/var/lib/postgresql/data
-      - ./db-init/init.sql:/docker-entrypoint-initdb.d/init.sql
-    networks: # <-- Correcto: el servicio se une a la red
+      # Esta línea asume que tu SQL está en la carpeta 'db_init' (con guion bajo)
+      - ./db_init/init.sql:/docker-entrypoint-initdb.d/init.sql
+    networks:
       - casigano-net
 
   # --- Tu Microservicio de Apuestas en Go ---
@@ -18,18 +29,24 @@ services:
       context: .
       dockerfile: Dockerfile
     container_name: casigano-svc-apuestas
-    # ... (el resto de tu configuración de apuestas-go)
-    networks: # <-- Correcto: el servicio se une a la red
+    restart: on-failure
+    
+    # --- BLOQUE AÑADIDO (¡Este también faltaba!) ---
+    # Esta es la instrucción para que tu app Go encuentre la BD
+    environment:
+      DATABASE_URL: "postgres://casigano_user:casigano_pass@db_apuestas:5432/casigano_apuestas_db?sslmode=disable"
+      
+    ports:
+      - "8081:8081" # Expone el puerto de tu API
+    depends_on:
+      - db_apuestas # Espera a que la BD esté lista
+    networks:
       - casigano-net
 
 # --- Volúmenes y Redes ---
 volumes:
   postgres-data: # El volumen nombrado para persistir la BD
 
-# 
-# !!! ESTE ES EL BLOQUE QUE PROBABLEMENTE FALTA !!!
-# Asegúrate de que esté al nivel raíz (sin indentación)
-#
 networks:
   casigano-net: # Define la red que los servicios pueden usar
     driver: bridge

@@ -24,3 +24,16 @@ INSERT INTO apuestas (usuario_id, evento_id, monto_apostado, cuota, estado)
 VALUES
     ('a0eebc99-9c0b-4ef8-bb6d-6bb9bd380a11', 'b0eebc99-9c0b-4ef8-bb6d-6bb9bd380a22', 100.00, 1.75, 'pendiente'),
     ('c0eebc99-9c0b-4ef8-bb6d-6bb9bd380a33', 'd0eebc99-9c0b-4ef8-bb6d-6bb9bd380a44', 50.00, 2.50, 'ganada');
+
+    -- Usuario 1 ('a0...a11')
+    ('a0eebc99-9c0b-4ef8-bb6d-6bb9bd380a11', 'b0eebc99-9c0b-4ef8-bb6d-6bb9bd380a22', 100.00, 1.75, 'pendiente'),
+    ('a0eebc99-9c0b-4ef8-bb6d-6bb9bd380a11', 'd0eebc99-9c0b-4ef8-bb6d-6bb9bd380a44', 25.00, 3.10, 'perdida'),
+    ('a0eebc99-9c0b-4ef8-bb6d-6bb9bd380a11', 'e0eebc99-9c0b-4ef8-bb6d-6bb9bd380a55', 75.00, 2.45, 'pendiente'),
+
+    -- Usuario 2 ('c0...a33')
+    ('c0eebc99-9c0b-4ef8-bb6d-6bb9bd380a33', 'd0eebc99-9c0b-4ef8-bb6d-6bb9bd380a44', 50.00, 2.50, 'ganada'),
+    ('c0eebc99-9c0b-4ef8-bb6d-6bb9bd380a33', 'f0eebc99-9c0b-4ef8-bb6d-6bb9bd380a66', 10.50, 8.00, 'ganada'),
+
+    -- Usuario 3 ('g0...a77')
+    ('g0eebc99-9c0b-4ef8-bb6d-6bb9bd380a77', 'b0eebc99-9c0b-4ef8-bb6d-6bb9bd380a22', 200.00, 1.70, 'pendiente'),
+    ('g0eebc99-9c0b-4ef8-bb6d-6bb9bd380a77', 'f0eebc99-9c0b-4ef8-bb6d-6bb9bd380a66', 50.00, 7.50, 'perdida');

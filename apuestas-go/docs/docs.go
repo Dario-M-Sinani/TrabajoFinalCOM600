@@ -66,6 +66,47 @@ const docTemplate = `{
                     }
                 }
             }
+        },
+        "/usuarios/{id}/apuestas": {
+            "get": {
+                "description": "Retorna una lista de todas las apuestas de un usuario",
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "apuestas"
+                ],
+                "summary": "Obtiene apuestas por ID de usuario",
+                "parameters": [
+                    {
+                        "type": "string",
+                        "description": "ID del Usuario (UUID)",
+                        "name": "id",
+                        "in": "path",
+                        "required": true
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "$ref": "#/definitions/apuestas.Apuesta"
+                            }
+                        }
+                    },
+                    "500": {
+                        "description": "Error: Interno del servidor",
+                        "schema": {
+                            "type": "object",
+                            "additionalProperties": {
+                                "type": "string"
+                            }
+                        }
+                    }
+                }
+            }
         }
     },
     "definitions": {

@@ -38,8 +38,8 @@ func main() {
     {
         // Rutas de Apuestas
         api.POST("/apuestas", apuestasHandler.CrearApuesta)
-        // api.GET("/apuestas/:id", apuestasHandler.ObtenerApuesta)
-        // api.GET("/usuarios/:id/apuestas", apuestasHandler.ObtenerApuestasPorUsuario)
+        api.GET("/apuestas/:id", apuestasHandler.ObtenerApuesta)
+        api.GET("/usuarios/:id/apuestas", apuestasHandler.ObtenerApuestasPorUsuario)
     }
 
     // 4. Configurar ruta de Swagger
